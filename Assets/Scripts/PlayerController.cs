@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
 	public GameObject shieldSpawn;
 
 	//i.e. Speed
-	public float moveForce;
-	public float maxSpeed;
+	public float moveSpeed;
+	//public float maxSpeed;
 
 	//Power of a jump
 	public float jumpForce;
@@ -118,6 +118,10 @@ public class PlayerController : MonoBehaviour
 	{
 		h = Input.GetAxis ("Horizontal");
 
+        if (h != 0.0f && !crouching)
+            rb.velocity = new Vector2(h * moveSpeed, rb.velocity.y);
+
+        /*
 		//The following two conditionals create a speed cap
 		if (h * rb.velocity.x < maxSpeed && !crouching) 
 		{
@@ -129,6 +133,7 @@ public class PlayerController : MonoBehaviour
 			//Mathf.Sign returns -1 or 1 depending on the sign of the input
 			rb.velocity = new Vector2 (Mathf.Sign (rb.velocity.x) * maxSpeed, rb.velocity.y);
 		}
+        */
 
         if (h > 0 && !facingRight)
         {
